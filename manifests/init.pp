@@ -223,7 +223,7 @@ class rsyslog (
       require => File[$rsyslog_conf],
     }
   } else {
-    Notify("Caller module ${caller_module_name}")
+    Notify("Caller module ${module_name}")
     file { $rsyslog_default:
       ensure  => file,
       owner   => 'root',
