@@ -42,7 +42,7 @@
 #   `rsyslog_d` file template to use
 #
 # @param rsyslog_default_file_absolute_path
-#   `rsyslog_d` use the absolute template path
+#   `rsyslog_d` Use rsyslog_default_file as the absolute template path
 #
 # @param run_user
 #   Which user rsyslog should run as
