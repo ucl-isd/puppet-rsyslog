@@ -213,7 +213,7 @@ class rsyslog (
   }
 
   if($rsyslog_default_use_caller_module == true ) {
-    Notify("Caller module ${caller_module_name}")
+    Notify("Caller module ${caller_module_name} - cake")
     file { $rsyslog_default:
       ensure  => file,
       owner   => 'root',
@@ -223,7 +223,7 @@ class rsyslog (
       require => File[$rsyslog_conf],
     }
   } else {
-    Notify("Caller module ${module_name}")
+    Notify("Caller module ${module_name} - Not cake")
     file { $rsyslog_default:
       ensure  => file,
       owner   => 'root',
