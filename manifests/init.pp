@@ -212,13 +212,13 @@ class rsyslog (
     require => File[$rsyslog_d],
   }
 
-  if($rsyslog_default_use_caller_module == true ) {
+  if($rsyslog_default_use_caller_module == false ) {
     Notify{"Caller module ${caller_module_name} - cake": }
     file { $rsyslog_default:
       ensure  => file,
       owner   => 'root',
       group   => $run_group,
-      content => template("${caller_module_name}/${rsyslog_default_file}.erb"),
+      content => template("${rsyslog_default_file}.erb"),
       notify  => Service[$service_name],
       require => File[$rsyslog_conf],
     }
