@@ -41,8 +41,8 @@
 # @param rsyslog_default_file
 #   `rsyslog_d` file template to use
 #
-# @param rsyslog_default_use_caller_module
-#   `rsyslog_d` use the called module for templates
+# @param rsyslog_default_file_absolute_path
+#   `rsyslog_d` use the absolute template path
 #
 # @param run_user
 #   Which user rsyslog should run as
@@ -153,7 +153,7 @@ class rsyslog (
   String[1] $rsyslog_conf_template_file = "${module_name}/rsyslog.conf.erb",
   Stdlib::Absolutepath $rsyslog_default = $rsyslog::params::rsyslog_default,
   String[1] $rsyslog_default_file = $rsyslog::params::default_config_file,
-  Boolean $rsyslog_default_use_caller_module = false,
+  Boolean $rsyslog_default_file_absolute_path = false,
   String[1] $run_user = $rsyslog::params::run_user,
   String[1] $run_group = $rsyslog::params::run_group,
   String[1] $log_user = $rsyslog::params::log_user,
@@ -212,8 +212,7 @@ class rsyslog (
     require => File[$rsyslog_d],
   }
 
-  if($rsyslog_default_use_caller_module == false ) {
-    Notify{"Caller module ${caller_module_name} - cake": }
+  if($rsyslog_default_file_absolute_path == false ) {
     file { $rsyslog_default:
       ensure  => file,
       owner   => 'root',
@@ -223,7 +222,6 @@ class rsyslog (
       require => File[$rsyslog_conf],
     }
   } else {
-    Notify{"Caller module ${module_name}": }
     file { $rsyslog_default:
       ensure  => file,
       owner   => 'root',
